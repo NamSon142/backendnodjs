@@ -18,6 +18,24 @@
             text-align: left;
             padding: 8px;
         }
+        .btn-edit{
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid black;
+            border-radius: 5px;
+            background: #dddddd;
+            color: black;
+            padding: 5px;
+        }
+        .btn-delete{
+            cursor: pointer;
+            text-decoration: none;
+            border: 1px solid black;
+            border-radius: 5px;
+            background: #dddddd;
+            color: black;
+            padding: 5px;
+        }
     </style>
 </head>
 
@@ -31,6 +49,7 @@
             <th>Address</th>
             <th>Sex</th>
             <th>Level</th>
+            <th>Action</th>
         </tr>
         <% for(let i = 0; i < data.length; i++){ %>
             <tr>
@@ -41,6 +60,10 @@
                 <td><%= data[i].address %></td>
                 <td><%= data[i].sex %></td>
                 <td><%= data[i].level %></td>
+                <td>
+                    <a href="/edit-crud?id=<%= data[i].id %>" class="btn-edit" type="button">Edit</a>
+                    <a href="" class="btn-delete" type="button">Delete</a>
+                </td>
             </tr>
         <% } %>
     </table>
