@@ -18,7 +18,7 @@ let getCRUD = (req, res) => {
 let postCRUD = async (req, res) => {
     let message = await CRUDService.createNewUser(req.body);
     console.log(message);
-    return res.send('post crud from server');
+    return res.send('create succeed!');
 }
 
 // hien thi
@@ -56,6 +56,17 @@ let putCRUD = async (req, res) => {
     })
 }
 
+// xoa
+let deleteCRUD = async (req, res) => {
+    let userId = req.query.id;
+    if(userId){
+        await CRUDService.deleteUserById(userId);
+        return res.send("delete succeed!");
+    }else{
+        return res.send("Khong tim thay nguoi dung");
+    }
+}
+
 //object {key: '', value; ''}
 module.exports = {
     getHomePage: getHomePage,
@@ -64,4 +75,5 @@ module.exports = {
     displayGetCRUD: displayGetCRUD,
     getEditCRUD: getEditCRUD,
     putCRUD: putCRUD,
+    deleteCRUD: deleteCRUD,
 }

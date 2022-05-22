@@ -75,7 +75,6 @@ let getUserInfoById = (userId) => {
 let updateUserData = (data) => {
     // console.log("data from service");
     // console.log(data);
-
     return new Promise(async (resolve, reject) => {
         try{
             let user = await db.User.findOne({ // tim user trong db
@@ -92,7 +91,7 @@ let updateUserData = (data) => {
                 await user.save(); // luu
 
                 let allUsers = await db.User.findAll();
-                resolve(allUsers);
+                resolve(allUsers); // hien thi users sau khi update
             }else{
                 resolve();
             }
@@ -103,9 +102,27 @@ let updateUserData = (data) => {
     })
 }
 
+// xoa
+let deleteUserById = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let user = await db.User.findOne({
+                where: {id: userId}
+            })
+            if(user){
+                await user.destroy(); // xoa user
+            }
+            resolve(); //return
+        }catch(e){
+            reject(e);
+        }
+    })
+}
+
 module.exports = {
     createNewUser: createNewUser,
     getAllUser: getAllUser,
     getUserInfoById: getUserInfoById,
-    updateUserData: updateUserData
+    updateUserData: updateUserData,
+    deleteUserById: deleteUserById,
 }
